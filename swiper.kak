@@ -4,8 +4,9 @@
 
 declare-option str swiper_cmd 'grep -in'
 declare-option str swiper_buf
+declare-option str swiper_callback 'x'
 
-define-command swiper %{
+define-command swiper -docstring 'swiper: run swiper on the current buffer' %{
   set-option global swiper_buf %val{bufname}
 
   evaluate-commands -draft %{
@@ -25,7 +26,8 @@ define-command -hidden swiper--jump %{
   evaluate-commands -save-regs 'a' %{
     execute-keys 'git:"ay'
     swiper--cleanup
-    execute-keys "%reg{a}gx"
+    execute-keys "%reg{a}g"
+    execute-keys -with-maps -with-hooks %opt{swiper_callback}
   }
 }
 
