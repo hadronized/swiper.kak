@@ -5,6 +5,10 @@ This tool is a composable tool used to _filter your Kakoune buffers_. It comes w
 - `swiper`
 - `swiper-reduce`
 
+<p align="center">
+  <img src="https://github.com/phaazon/swiper.kak/assets/506592/b2599870-b346-4841-b48a-57ff83401c32"/>
+</p>
+
 ## Reducing buffers
 
 The `swiper-reduce` command is probably the most useful one, as it filters a buffer in-place (it _reduces_ it). It does
