@@ -32,7 +32,7 @@ define-command swiper-reduce -docstring ':swiper-reduce: open swiper on the curr
   }
 }
 
-define-command swiper--setup %{
+define-command -hidden swiper--setup %{
   set-option global swiper_buf %val{bufname}
 
   evaluate-commands -draft %{
