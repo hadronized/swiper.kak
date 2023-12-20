@@ -25,6 +25,7 @@ define-command swiper-reduce -docstring ':swiper-reduce: open swiper on the curr
   evaluate-commands %sh{
     if [ "$kak_opt_swiper_enabled" != 'true' ]; then
       echo "swiper--setup"
+      echo "set-option buffer swiper_enabled true"
     fi
 
     echo 'swiper--prompt "%opt{swiper_reduce_cmd}"' 
@@ -33,7 +34,6 @@ define-command swiper-reduce -docstring ':swiper-reduce: open swiper on the curr
 
 define-command swiper--setup %{
   set-option global swiper_buf %val{bufname}
-  set-option buffer swiper_enabled true
 
   evaluate-commands -draft %{
     execute-keys '%"ay'
