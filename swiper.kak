@@ -51,7 +51,7 @@ define-command -hidden swiper--jump %{
 }
 
 define-command -hidden swiper--prompt -params 1 %{
-  prompt -on-change "swiper--update-content ""%arg{1}""" -on-abort swiper--cleanup swiper: %{
+  prompt -on-change "swiper--update-content ""%arg{1}""" -on-abort swiper--disable swiper: %{
     execute-keys 'gg'
   }
 }
@@ -64,6 +64,11 @@ define-command -hidden swiper--update-content -params 1 %{
     # filter the content with the command
     execute-keys "%%""zR|%arg{1} ""%val{text}""<ret>"
   }
+}
+
+define-command swiper--disable %{
+  swiper--cleanup
+  set-option buffer swiper_enabled false
 }
 
 define-command -hidden swiper--cleanup %{
