@@ -14,6 +14,7 @@ define-command swiper -docstring 'swiper: open a *swiper* buffer with the conten
     if [ "$kak_opt_swiper_enabled" != 'true' ]; then
       echo "swiper--setup"
       echo "edit -scratch '*swiper*'"
+      echo "swiper--add-highlighters"
       echo "map buffer normal <ret> ':swiper--jump<ret>'"
     fi
 
@@ -39,6 +40,10 @@ define-command -hidden swiper--setup %{
     execute-keys '%"ay'
     set-option global swiper_content %reg{a}
   }
+}
+
+define-command -hidden swiper--add-highlighters %{
+  add-highlighter -override buffer/swiper regex '^([0-9]+:)([^\n]*)$' 1:green 2:cyan
 }
 
 define-command -hidden swiper--jump %{
