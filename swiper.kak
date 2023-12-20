@@ -73,7 +73,7 @@ define-command -hidden swiper--update-content -params 1 %{
 
 define-command swiper-disable %{
   swiper--cleanup
-  set-option buffer swiper_enabled false
+  unset-option buffer swiper_enabled 
 }
 
 define-command -hidden swiper--cleanup %{
