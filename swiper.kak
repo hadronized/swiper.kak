@@ -51,7 +51,7 @@ define-command -hidden swiper--jump %{
 }
 
 define-command -hidden swiper--prompt -params 1 %{
-  prompt -on-change "swiper--update-content ""%arg{1}""" -on-abort swiper--disable swiper: %{
+  prompt -on-change "swiper--update-content ""%arg{1}""" -on-abort swiper-disable swiper: %{
     execute-keys 'gg'
   }
 }
@@ -66,7 +66,7 @@ define-command -hidden swiper--update-content -params 1 %{
   }
 }
 
-define-command swiper--disable %{
+define-command swiper-disable %{
   swiper--cleanup
   set-option buffer swiper_enabled false
 }
