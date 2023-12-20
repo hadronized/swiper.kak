@@ -72,19 +72,21 @@ define-command swiper--disable %{
 }
 
 define-command -hidden swiper--cleanup %{
-  buffer %opt{swiper_buf}
-  set-option global swiper_buf ''
+  try %{
+    buffer %opt{swiper_buf}
+    set-option global swiper_buf ''
+
+    # restore original content
+    evaluate-commands -draft %{
+      set-register z %opt{swiper_content}
+      execute-keys '%"zR'
+    }
+
+    set-option global swiper_content ''
+  }
 
   try %{
     delete-buffer! '*swiper*'
   }
-
-  # restore original content
-  evaluate-commands -draft %{
-    set-register z %opt{swiper_content}
-    execute-keys '%"zR'
-  }
-
-  set-option global swiper_content ''
 }
 
