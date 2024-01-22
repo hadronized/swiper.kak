@@ -5,6 +5,7 @@
 declare-option str swiper_cmd 'grep -in'
 declare-option str swiper_reduce_cmd 'grep -i'
 declare-option bool swiper_enabled
+declare-option str swiper_terms
 declare-option str swiper_buf
 declare-option str swiper_content
 declare-option str swiper_callback 'x'
@@ -68,11 +69,15 @@ define-command -hidden swiper--update-content -params 1 %{
 
     # filter the content with the command
     execute-keys "%%""zR|%arg{1} ""%val{text}""<ret>"
+
+    # set the swiper terms
+    set-option buffer swiper_terms %val{text}
   }
 }
 
 define-command swiper-disable %{
   swiper--cleanup
+  unset-option buffer swiper_terms
   unset-option buffer swiper_enabled 
 }
 
@@ -94,4 +99,3 @@ define-command -hidden swiper--cleanup %{
     delete-buffer! '*swiper*'
   }
 }
-
